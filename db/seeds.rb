@@ -35,4 +35,6 @@ Record.create(start_date: "00:23:31", end_date: "00:23:40", user_id: morpheus.id
 Record.create(start_date: "00:23:45", end_date: "00:23:55", user_id: morpheus.id, meeting_id: meeting_1.id)
 Record.create(start_date: "00:24:11", end_date: "00:24:20", user_id: neo.id, meeting_id: meeting_1.id)
 Record.create(start_date: "00:24:21", end_date: "00:24:30", user_id: trinity.id, meeting_id: meeting_1.id)
+Record.create(start_date: "00:23:31", end_date: "00:23:40", user_id: morpheus.id, meeting_id: meeting_2.id)
+Record.create(start_date: "00:23:45", end_date: "00:23:55", user_id: morpheus.id, meeting_id: meeting_2.id)
 
