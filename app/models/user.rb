@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# User Model
 class User < ApplicationRecord
   has_many :records
   has_many :meetings, -> { distinct }, through: :records
@@ -33,6 +36,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def avg_time(arr)
     avg_time_in_seconds = arr.inject(&:+) / arr.length.to_f
     convert_seconds_to_time(avg_time_in_seconds)
@@ -44,9 +48,9 @@ class User < ApplicationRecord
   end
 
   def convert_seconds_to_time(seconds)
-    Time.at(seconds).utc.strftime("%H:%M:%S")
+    Time.at(seconds).utc.strftime('%H:%M:%S')
   end
-  
+
   def find_records(meeting)
     records.where(meeting: meeting)
   end
