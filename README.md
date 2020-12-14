@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* This is a Ruby App That Display Meetings and it's records and users.
 
-Things you may want to cover:
+You can check it live on -> https://combine-ai-challenge.herokuapp.com/
 
-* Ruby version
+If you want to run it locally:
+```ruby
+git clone && cd into app folder
+bundle install
+rails db:migrate
+rails db:seed
 
-* System dependencies
+go to: http://127.0.0.1:5100/
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## ToDo
+* Fix the views
+* Write Request and e2e tests
