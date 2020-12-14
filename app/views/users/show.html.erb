@@ -1,0 +1,53 @@
+<div>
+  <h1 class="text-center"><%= @user.name %></h1>
+</div>
+<div class="alert alert-info" role="alert">
+    You can check the meetings this user participate and it's state
+</div>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Record</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.records.each do |record| %>
+      <tr>
+        <% meeting = Meeting.find_by_id(record.meeting_id).name%>
+        <th scope="row"><%= link_to meeting, meeting_path(record.meeting_id) %></th>
+          <td><%=  record.start_date.strftime('%H:%M:%S')  %></td>
+        <td><%=  record.end_date.strftime('%H:%M:%S')  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+<div>
+  <h2> Stats </h2>
+</div>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Meeting</th>
+      <th scope="col">Avg Speak Time</th>
+      <th scope="col">Total Speak Time</th>
+      <th scope="col">Participations</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.meetings.each do |meeting| %>
+      <tr>
+        <th scope="row"><%= link_to meeting.name, meeting_path(meeting.id) %></th>
+        <td><%= @user.avg_speak_time(meeting) %></td>
+        <td><%= @user.total_speak_time(meeting) %></td>
+        <td><%= @user.number_of_participations_by_meeting(meeting) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

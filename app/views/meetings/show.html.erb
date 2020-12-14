@@ -1,0 +1,93 @@
+<div>
+  <h1 class="text-center"><%= @meeting.name %></h1>
+</div>
+<div class="alert alert-info" role="alert">
+    You can filter results by user name and click on the user to see it's data<br>
+    Scroll down to see meeting stats
+</div>
+<br>
+<table id="myTable" class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meeting_records.each do |record| %>
+      <tr id="filterTable">
+        <th scope="row"><%= link_to record[0], user_path(User.find_by_name(record[0]).id) %></th>
+        <td><%= record[1] %></td>
+        <td><%= record[2] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value;
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("th")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+</table>
+
+<br>
+<h3> Participation Ranking </h3>
+<table class="table table-hover">
+  <tbody>
+    <% participations = @meeting.contributions_by_number_of_participations %>
+    <% participations.each do |user, value| %>
+      <tr>
+        <th scope="row"><%= user %></th>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3> Average Speak Time Ranking </h3>
+<table class="table table-hover">
+  <tbody>
+    <% participations = @meeting.contributions_by_avg_speak_time %>
+    <% participations.each do |user, value| %>
+      <tr>
+        <th scope="row"><%= user %></th>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h3> Total Speak Time Ranking </h3>
+<table class="table table-hover">
+  <tbody>
+    <% participations = @meeting.contributions_by_total_speak_time %>
+    <% participations.each do |user, value| %>
+      <tr>
+        <th scope="row"><%= user %></th>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a class="btn btn-primary" href="#" role="button"><%= link_to "Return to Meetings", meetings_path%></a>

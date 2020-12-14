@@ -42,12 +42,14 @@ RSpec.describe Meeting, type: :model do
     end
   end
 
-  describe '#pretty_print' do
-    it 'prints everything nicely' do
+  describe '#format_data' do
+    it 'format the data' do
       create(:record, start_date: '03:10:20', end_date: '03:12:30', user_id: user.id,
                       meeting_id: meeting.id)
-      response = "#{user.name} ST -> #{user.records[0].start_date.strftime('%H:%M:%S')} ET -> #{user.records[0].end_date.strftime('%H:%M:%S')}"
-      expect(meeting.pretty_print).to eq([response])
+      et = user.records[0].start_date.strftime('%H:%M:%S')
+      st = user.records[0].end_date.strftime('%H:%M:%S')
+      response = [user.name, st, et]
+      expect(meeting.format_data).to eq([response])
     end
   end
 end

@@ -29,14 +29,14 @@ class Meeting < ApplicationRecord
     contributions.sort_by { |_name, participations| participations }.reverse
   end
 
-  def pretty_print
+  def format_data
     recs = []
     records.each do |record|
       st = parse_time(record.start_date)
       et = parse_time(record.end_date)
       user = User.find_by_id(record.user_id).name
 
-      recs << "#{user} ST -> #{st} ET -> #{et}"
+      recs << [user, et, st]
     end
     recs
   end
