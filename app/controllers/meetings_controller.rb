@@ -1,6 +1,9 @@
 class MeetingsController < ApplicationController
   def index
     @meetings = Meeting.all
+    if @meetings.nil?
+      render :status => 404
+    end
   end
 
   def show
