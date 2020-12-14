@@ -19,8 +19,8 @@
     <% @meeting_records.each do |record| %>
       <tr id="filterTable">
         <th scope="row"><%= link_to record[0], user_path(User.find_by_name(record[0]).id) %></th>
-        <td><%= record[1] %></td>
         <td><%= record[2] %></td>
+        <td><%= record[1] %></td>
       </tr>
     <% end %>
   </tbody>
